@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Manager</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    border-radius: 10px;
+
+   
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    background-color: #f8f8f8; 
+    padding: 10px; 
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+}
+
+form input,
+form select,
+form button {
+    flex-basis: calc(25% - 10px);
+    margin-right: 10px;
+    padding: 15px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+button[type="button"] {
+    background-color: #515457; 
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border-radius: 20px;
+}
+
+button[type="button"]:hover {
+    background-color: #535557; 
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+option:hover {
+    background-color: #f0f0f0;
+}
+
+option:disabled {
+    color: #999;
+}
+.container button{
+    padding: 15px 20px;
+    background-color: #515457;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    border-radius: 20px; 
+    font-size: 16px;
+}
+@media screen and (max-width: 600px) {
+    form {
+        flex-direction: column;
+        
+    }
+
+    form input,
+    form select,
+    form button {
+        flex-basis: 100%;
+        margin-right: 0;
+        margin-top: 10px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Task Manager</h1>
+    <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="Title" required>
+        <input type="text" id="taskDescription" placeholder="Description" required>
+        <select id="taskPriority" required>
+            <option value="" disabled selected>Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <input type="date" id="taskDate" required>
+        <button type="button" onclick="addTask()">Add Task</button> 
+    </form>
+    <button onclick="window.location.href='list1.html'">View Tasks</button> 
+</div>
+<script>
+function addTask() {
+    const taskTitle = document.getElementById('taskTitle').value;
+    const taskDescription = document.getElementById('taskDescription').value;
+    const taskPriority = document.getElementById('taskPriority').value;
+    const taskDate = document.getElementById('taskDate').value;
+
+    const task = {
+        title: taskTitle,
+        description: taskDescription,
+        priority: taskPriority,
+        date: taskDate
+    };
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+</script>
+</body>
+</html>
